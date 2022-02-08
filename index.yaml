@@ -1,0 +1,10 @@
+name: gitops-mongo-ce-instance
+type: gitops
+description: >-
+  Module to populate a gitops repo with the resources to provision
+  mongo-ce-instance
+tags:
+  - tools
+  - gitops
+versions: []
+id: github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-instance
