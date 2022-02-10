@@ -1,8 +1,8 @@
-name: gitops-mongo-ce-instance
+name: gitops-mongo-ce
 type: gitops
 description: >-
   Module to populate a gitops repo with the resources to provision
-  mongo-ce-instance
+  mongo-ce instance
 tags:
   - tools
   - gitops
