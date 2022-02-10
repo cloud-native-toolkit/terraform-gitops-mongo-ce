@@ -5,8 +5,8 @@ locals {
   secret_dir    = "${local.tmp_dir}/secrets"
   yaml_dir      = "${local.tmp_dir}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
-  secret_name   = "mongo-ce-tls"
-  password_secret_name = "mongo-ce-password"
+  secret_name   = "${local.name}-tls"
+  password_secret_name = "${local.name}-password"
   values_content = {
     secretName = local.secret_name
     passwordSecretName = local.password_secret_name
@@ -148,7 +148,7 @@ resource null_resource create_secret {
   depends_on = [null_resource.create_yaml]
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-secrets.sh '${local.secret_name}' '${var.namespace}' '${local.tmp_dir}/server.key' '${local.tmp_dir}/server.crt' '${local.yaml_dir}/templates' '${local.password_secret_name}' '${var.password}'"
+    command = "${path.module}/scripts/create-secrets.sh '${local.secret_name}' '${var.namespace}' '${local.tmp_dir}/server.key' '${local.tmp_dir}/server.crt' '${local.secret_dir}' '${local.password_secret_name}' '${var.password}'"
   }
 }
 
