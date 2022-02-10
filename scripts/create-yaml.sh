@@ -12,8 +12,6 @@ mkdir -p "${DEST_DIR}"
 ## Add logic here to put the yaml resource content in DEST_DIR
 cp -R "${CHART_DIR}/"* "${DEST_DIR}"
 
-if [[ -z "${VALUES_CONTENT}" ]]; then
+if [[ -n "${VALUES_CONTENT}" ]]; then
   echo "${VALUES_CONTENT}" > "${DEST_DIR}"
 fi
-
-find "${DEST_DIR}" -name "*"
