@@ -134,9 +134,21 @@ resource "local_file" "srvcrtfile" {
   filename    = "${local.tmp_dir}/server.crt"
 }
 
-resource null_resource create_secret {
+resource null_resource create_yaml {
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-tls-secret.sh '${local.secret_name}' '${var.namespace}' '${local.tmp_dir}/server.key' '${local.tmp_dir}/server.crt' '${local.yaml_dir}/templates' '${local.password_secret_name}' '${var.password}'"
+    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
+
+    environment = {
+      VALUES_CONTENT = yamlencode(local.values_content)
+    }
+  }
+}
+
+resource null_resource create_secret {
+  depends_on = [null_resource.create_yaml]
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/create-secrets.sh '${local.secret_name}' '${var.namespace}' '${local.tmp_dir}/server.key' '${local.tmp_dir}/server.crt' '${local.yaml_dir}/templates' '${local.password_secret_name}' '${var.password}'"
   }
 }
 
@@ -149,16 +161,6 @@ module seal_secrets {
   dest_dir      = "${local.yaml_dir}/templates"
   kubeseal_cert = var.kubeseal_cert
   label         = local.name
-}
-
-resource null_resource create_yaml {
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
-
-    environment = {
-      VALUES_CONTENT = yamlencode(local.values_content)
-    }
-  }
 }
 
 resource null_resource setup_gitops {
