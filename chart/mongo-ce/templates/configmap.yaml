@@ -1,0 +1,8 @@
+{{- if .Values.mongocecm.cacrt }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mongo-ce.name" . }}
+data:
+  ca.crt: {{- $.Values.mongocecm.cacrt | nindent 4 }}
+{{- end }}

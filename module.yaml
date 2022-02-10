@@ -1,8 +1,8 @@
-name: gitops-mongo-ce-instance
+name: gitops-mongo-ce
 type: gitops
 description: >-
   Module to populate a gitops repo with the resources to provision
-  mongo-ce-instance
+  mongo-ce instance
 tags:
   - tools
   - gitops
@@ -16,9 +16,9 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-tools-gitops.git
             version: '>= 1.1.0'
-      - id: namespace
+      - id: mongo-operator
         refs:
-          - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator
             version: '>= 1.0.0'
     variables:
       - name: gitops_config
@@ -35,8 +35,8 @@ versions:
           output: server_name
       - name: namespace
         moduleRef:
-          id: namespace
-          output: name
+          id: mongo-operator
+          output: namespace
       - name: kubeseal_cert
         moduleRef:
           id: gitops

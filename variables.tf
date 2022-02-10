@@ -79,3 +79,14 @@ variable "server_name" {
   description = "The name of the server"
   default     = "default"
 }
+
+variable "password" {
+  type        = string
+  description = "The database password"
+  default     = "password"
+}
+
+variable "storage_class_name" {
+  type        = string
+  description = "The storage class to use for database"
+}
