@@ -4,7 +4,7 @@ kind: MongoDBCommunity
 metadata:
   name: {{ include "mongo-ce.name" . }}
   labels:
-    {{ include "mongo-ce.labels" | nindent 4 }}
+    {{ include "mongo-ce.labels" . | nindent 4 }}
 spec:
   members: 3
   type: ReplicaSet
