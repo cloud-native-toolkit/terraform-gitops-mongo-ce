@@ -90,3 +90,13 @@ variable "storage_class_name" {
   type        = string
   description = "The storage class to use for database"
 }
+
+variable "port" {
+  type        = string
+  description = "The port to use for database"
+}
+
+variable "cacrt" {
+  type        = string
+  description = "The cacert created for database"
+}
