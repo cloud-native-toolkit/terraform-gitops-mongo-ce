@@ -28,3 +28,16 @@ output "type" {
   description = "The type of module where the module is deployed"
   value       = gitops_module.module.type
 }
+
+output "password" {
+  value       = var.password
+  description = "mongo admin pw"
+  depends_on  = [gitops_module.module]
+  sensitive   = true
+}
+
+output "service_account" {
+  value       = var.mongo_serviceaccount
+  description = "Name of the service account to use for mongo"
+  depends_on  = [gitops_module.module]
+}
