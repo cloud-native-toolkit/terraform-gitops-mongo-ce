@@ -35,9 +35,3 @@ output "password" {
   depends_on  = [gitops_module.module]
   sensitive   = true
 }
-
-output "service_account" {
-  value       = var.mongo_serviceaccount
-  description = "Name of the service account to use for mongo"
-  depends_on  = [gitops_module.module]
-}
