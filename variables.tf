@@ -100,7 +100,7 @@ variable "port" {
 variable "cacrt" {
   type        = string
   description = "The cacert created for database"
-  depends_on  = [tls_self_signed_cert.ca.cert_pem]
+  default  = [tls_self_signed_cert.ca.cert_pem]
 }
 
 variable "mongo_version" {
