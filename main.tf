@@ -15,6 +15,8 @@ locals {
     version = var.mongo_version
     replicaset_count = var.replicaset_count
     name = local.name
+    crt =  base64encode("${local_file.srvcrtfile.sensitive_content}")
+    key = base64encode("${local_file.srvkeyfile.sensitive_content}")
     mongocecm  = {
       cacrt = tls_self_signed_cert.ca.cert_pem
     }

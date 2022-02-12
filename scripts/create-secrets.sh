@@ -11,12 +11,7 @@ DB_PWD="$7"
 
 mkdir -p "${DEST_DIR}"
 
-kubectl create secret tls "${NAME}" \
-  -n "${NAMESPACE}" \
-  --cert="${CERT_FILE}" \
-  --key="${KEY_FILE}" \
-  --dry-run=client \
-  --output=yaml > "${DEST_DIR}/${NAME}.yaml"
+
 
 kubectl create secret generic "${PWD_SECRET_NAME}" \
   -n "${NAMESPACE}" \
