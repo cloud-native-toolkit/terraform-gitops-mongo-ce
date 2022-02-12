@@ -94,9 +94,7 @@ variable "storage_class_name" {
 variable "port" {
   type        = string
   description = "The port to use for database"
+  default     = "27017"
 }
 
-variable "cacrt" {
-  type        = string
-  description = "The cacert created for database"
-}
+

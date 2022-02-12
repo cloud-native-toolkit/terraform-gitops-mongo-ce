@@ -35,7 +35,12 @@ output "password" {
   depends_on  = [gitops_module.module]
   sensitive   = true
 }
-
+output "port" {
+  value       = var.port
+  description = "mongo admin pw"
+  depends_on  = [gitops_module.module]
+  sensitive   = true
+}
 output "cacrt" {
   value       = var.cacrt
   description = "mongo cacert stored in cm"
@@ -43,11 +48,6 @@ output "cacrt" {
   sensitive   = true
 }
 
-output "port" {
-  value       = var.port
-  description = "mongo admin pw"
-  depends_on  = [gitops_module.module]
-  sensitive   = true
-}
+
 
 
