@@ -100,7 +100,6 @@ variable "port" {
 variable "cacrt" {
   type        = string
   description = "The cacert created for database"
-  default = tls_self_signed_cert.ca.cert_pem
   
 }
 
