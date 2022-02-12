@@ -7,7 +7,6 @@ locals {
   service_url   = "http://${local.name}.${var.namespace}"
   secret_name   = "${local.name}-tls"
   password_secret_name = "${local.name}-password"
-  cacrt = tls_self_signed_cert.ca.cert_pem
   values_content = {
     secretName = local.secret_name
     passwordSecretName = local.password_secret_name
