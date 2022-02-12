@@ -100,7 +100,27 @@ variable "port" {
 variable "cacrt" {
   type        = string
   description = "The cacert created for database"
-  
+  depends_on  = [tls_self_signed_cert.ca.cert_pem]
 }
+
+variable "mongo_version" {
+  type        = string
+  description = "version for mongodb to be installed"
+  default = "4.2.6"
+}
+
+variable "replicaset_count" {
+  type        = string
+  description = "No of pods to be created as part of replicaset"
+  default = "3"
+}
+
+variable "mongo_svcname" {
+  type        = string
+  description = "Mongo svcname"
+  default = "mas-mongo-ce-svc"
+}
+
+
 
 

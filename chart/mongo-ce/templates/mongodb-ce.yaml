@@ -6,9 +6,9 @@ metadata:
   labels:
     {{ include "mongo-ce.labels" . | nindent 4 }}
 spec:
-  members: 3
+  members: {{ .Values.replicaset_count }}
   type: ReplicaSet
-  version: "4.2.6"
+  version: {{ .Values.version }}
   security:
     tls:
       enabled: true
@@ -39,7 +39,7 @@ spec:
     net.tls.allowInvalidHostnames: true
   statefulSet:
     spec:
-      serviceName: mas-mongo-ce-svc
+      serviceName: {{ .Values.name }}
       selector: {}
       template:
         spec:

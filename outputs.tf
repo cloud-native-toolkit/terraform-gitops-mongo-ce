@@ -48,6 +48,22 @@ output "cacrt" {
   sensitive   = true
 }
 
+output "svcname" {
+  value       = var.mongo_svcname
+  description = "mongo service name"
+  depends_on  = [gitops_module.module]
+  sensitive   = true
+}
+
+output "replicaset_count" {
+  value       = var.replicaset_count
+  description = "Count of replicaset count"
+  depends_on  = [gitops_module.module]
+  sensitive   = true
+}
+
+
+
 
 
 
