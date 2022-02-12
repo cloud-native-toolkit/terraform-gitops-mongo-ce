@@ -95,3 +95,8 @@ variable "mongo_storageclass" {
   default = "ibmc-vpc-block-10iops-tier"
 }
 
+variable "cacrt" {
+  type        = string
+  description = "cacrt of mongo"
+  default = ""
+}
