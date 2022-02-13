@@ -3,6 +3,8 @@ kind: Secret
 metadata: 
   name: {{ .Values.secretName }}
 data: 
-  tls.key: {{- $.Values.key | nindent 4 }}
-  tls.crt:  {{- $.Values.crt | nindent 4 }}
+  tls.key: |
+    {{- $.Values.key | nindent 4 }}
+  tls.crt: |
+    {{- $.Values.crt | nindent 4 }}
 type: kubernetes.io/tls
