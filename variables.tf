@@ -90,3 +90,37 @@ variable "storage_class_name" {
   type        = string
   description = "The storage class to use for database"
 }
+
+variable "port" {
+  type        = string
+  description = "The port to use for database"
+  default     = "27017"
+}
+
+variable "cacrt" {
+  type        = string
+  description = "The cacert created for database"
+  default  = ""
+}
+
+variable "mongo_version" {
+  type        = string
+  description = "version for mongodb to be installed"
+  default = "4.2.6"
+}
+
+variable "replicaset_count" {
+  type        = string
+  description = "No of pods to be created as part of replicaset"
+  default = "3"
+}
+
+variable "mongo_svcname" {
+  type        = string
+  description = "Mongo svcname"
+  default = "mongo-ce"
+}
+
+
+
+

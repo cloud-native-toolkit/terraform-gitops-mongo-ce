@@ -4,5 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ include "mongo-ce.name" . }}
 data:
-  ca.crt: {{- $.Values.mongocecm.cacrt | nindent 4 }}
+  ca.crt: |
+     {{- $.Values.mongocecm.cacrt | nindent 4 }}
 {{- end }}

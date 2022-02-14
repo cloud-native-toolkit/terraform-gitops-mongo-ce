@@ -44,7 +44,7 @@ variable "cluster_exists" {
 variable "name_prefix" {
   type        = string
   description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
-  default     = ""
+  default     = "gitops-mongo-ce"
 }
 
 variable "vpc_cluster" {
@@ -93,4 +93,10 @@ variable "mongo_storageclass" {
   type        = string
   description = "Storageclass for MongoDB"
   default = "ibmc-vpc-block-10iops-tier"
+}
+
+variable "cacrt" {
+  type        = string
+  description = "cacrt of mongo"
+  default = ""
 }

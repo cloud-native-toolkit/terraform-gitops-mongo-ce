@@ -1,5 +1,5 @@
 module "cp_catalogs" {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git"
+  source = "github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git?ref=provider"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials

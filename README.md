@@ -1,5 +1,5 @@
 # MongoDB Community Edition instance gitops module
-
+ Module to populate a gitops repository with the resources required to provision the MongoDB instance on MongoDB Community Edition operator.
 ## Software dependencies
 
 The module depends on the following software components:
@@ -23,16 +23,16 @@ This module makes use of the output from other modules:
 ## Example usage
 
 ```hcl-terraform
-module "dev_tools_argocd" {
-  source = "github.com/cloud-native-toolkit/terraform-tools-argocd.git"
-
-  cluster_config_file = module.dev_cluster.config_file_path
-  cluster_type        = module.dev_cluster.type
-  app_namespace       = module.dev_cluster_namespaces.tools_namespace_name
-  ingress_subdomain   = module.dev_cluster.ingress_hostname
-  olm_namespace       = module.dev_software_olm.olm_namespace
-  operator_namespace  = module.dev_software_olm.target_namespace
-  name                = "argocd"
+module "mongo-ce" {
+  source = "github.com/cloud-native-toolkit/terraform-gitops-mongo-ce.git"
+  gitops_config = module.gitops.gitops_config
+  git_credentials = module.gitops.git_credentials
+  server_name = module.gitops.server_name
+  namespace = module.mongo-operator.namespace
+  kubeseal_cert = module.gitops.sealed_secrets_cert
+  storage_class_name = var.mongo_storageclass
+  cacrt = var.cacrt
+  
 }
 ```
 
