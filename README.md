@@ -19,6 +19,7 @@ This module makes use of the output from other modules:
 
 - GitOps - github.com/cloud-native-toolkit/terraform-tools-gitops.git
 - Namespace - github.com/cloud-native-toolkit/terraform-gitops-namespace.git
+- Mongo-ce operator - https://github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator
 
 ## Example usage
 
