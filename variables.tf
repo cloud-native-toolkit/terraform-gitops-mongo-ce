@@ -118,9 +118,6 @@ variable "replicaset_count" {
 variable "mongo_svcname" {
   type        = string
   description = "Mongo svcname"
-  default = "mongo-ce"
+  default = "mas-mongo-ce-svc"
 }
-
-
-
 

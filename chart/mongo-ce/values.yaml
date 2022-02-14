@@ -5,7 +5,7 @@
 secretName: "mongo-ce"
 passwordSecretName: "mongo-ce-password"
 
-serviceName: "mongo-ce"
+serviceName: "mas-mongo-ce-svc"
 
 mongocecm:
   cacrt: ""
