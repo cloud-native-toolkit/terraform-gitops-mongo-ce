@@ -122,10 +122,10 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-tools-gitops.git
             version: ">= 1.1.0"
-      - id: namespace
+      - id: mongo-operator
         refs:
-          - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
-            version: ">= 1.0.0"
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator
+            version: '>= 1.0.0'
     variables:
       - name: gitops_config
         moduleRef:
@@ -141,8 +141,8 @@ versions:
           output: server_name
       - name: namespace
         moduleRef:
-          id: namespace
-          output: name
+          id: mongo-operator
+          output: namespace
       - name: kubeseal_cert
         moduleRef:
           id: gitops
