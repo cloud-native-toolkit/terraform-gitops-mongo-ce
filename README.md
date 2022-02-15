@@ -32,7 +32,6 @@ module "mongo-ce" {
   namespace = module.mongo-operator.namespace
   kubeseal_cert = module.gitops.sealed_secrets_cert
   storage_class_name = var.mongo_storageclass
-  cacrt = var.cacrt
   
 }
 ```
