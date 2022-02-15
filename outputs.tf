@@ -35,6 +35,12 @@ output "username" {
   depends_on  = [gitops_module.module]
 }
 
+output "password" {
+  value       = var.password
+  description = "mongo admin password"
+  depends_on  = [gitops_module.module]
+}
+
 output "port" {
   value       = var.port
   description = "mongo admin pw"
