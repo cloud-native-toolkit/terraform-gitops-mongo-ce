@@ -28,7 +28,7 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-tools-gitops.git
             version: '>= 1.1.0'
-      - id: mongo-operator
+      - id: mongo_operator
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator
             version: '>= 1.0.0'

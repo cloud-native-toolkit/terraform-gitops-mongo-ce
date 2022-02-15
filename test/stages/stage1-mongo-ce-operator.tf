@@ -1,4 +1,4 @@
-module "mongo-operator" {
+module "mongo_operator" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator?ref=provider"
 
   gitops_config = module.gitops.gitops_config
