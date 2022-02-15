@@ -1,5 +1,5 @@
 locals {
-  name          = "mongo-ce"
+  name          = var.service_name
   bin_dir       = module.setup_clis.bin_dir
   tmp_dir       = "${path.cwd}/.tmp/${local.name}"
   secret_dir    = "${local.tmp_dir}/secrets"
@@ -15,8 +15,9 @@ locals {
     version = var.mongo_version
     replicaset_count = var.replicaset_count
     name = local.name
-    crt =  base64encode("${local_file.srvcrtfile.sensitive_content}")
-    key = base64encode("${local_file.srvkeyfile.sensitive_content}")
+    crt =  base64encode(local_file.srvcrtfile.sensitive_content)
+    key = base64encode(local_file.srvkeyfile.sensitive_content)
+    serviceName = var.service_name
     mongocecm  = {
       cacrt = tls_self_signed_cert.ca.cert_pem
     }

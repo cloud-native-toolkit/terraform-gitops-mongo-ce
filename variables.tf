@@ -115,7 +115,7 @@ variable "replicaset_count" {
   default = "3"
 }
 
-variable "mongo_svcname" {
+variable "service_name" {
   type        = string
   description = "Mongo svcname"
   default = "mongo-ce"

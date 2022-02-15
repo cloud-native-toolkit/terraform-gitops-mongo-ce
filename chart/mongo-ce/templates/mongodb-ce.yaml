@@ -2,7 +2,7 @@
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
-  name: {{ include "mongo-ce.name" . }}
+  name: {{ .Values.serviceName }}
   labels:
     {{ include "mongo-ce.labels" . | nindent 4 }}
 spec:
@@ -15,7 +15,7 @@ spec:
       certificateKeySecretRef:
         name: {{ .Values.secretName }}
       caConfigMapRef:
-        name: {{ include "mongo-ce.name" . }}
+        name: {{ .Values.serviceName }}
     authentication:
       modes: ["SCRAM-SHA-1", "SCRAM-SHA-256"]
   users:
@@ -32,14 +32,14 @@ spec:
           db: admin
         - name: readWriteAnyDatabase
           db: admin
-      scramCredentialsSecretName: mongo-ce-scram
+      scramCredentialsSecretName: {{ printf "%s-scram" .Values.serviceName }}
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: snappy
     net.tls.allowInvalidCertificates: true
     net.tls.allowInvalidHostnames: true
   statefulSet:
     spec:
-      serviceName: {{ .Values.name }}
+      serviceName: {{ .Values.serviceName }}
       selector: {}
       template:
         spec:
