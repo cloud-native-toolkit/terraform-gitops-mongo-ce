@@ -5,7 +5,7 @@ variable "resource_group_name" {
   description = "Existing resource group where the IKS cluster will be provisioned."
 }
 
-variable cluster_username { 
+variable "cluster_username" { 
   type        = string
   description = "The username for AWS access"
 }
