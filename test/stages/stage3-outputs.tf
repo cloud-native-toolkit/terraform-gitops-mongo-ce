@@ -15,6 +15,7 @@ resource null_resource write_outputs {
         port        = module.gitops_module.port
         cacrt       = module.gitops_module.cacrt
         servicename = module.gitops_module.svcname
+        password    = module.gitops_module.password
       })
     }
   }
