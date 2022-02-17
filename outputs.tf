@@ -56,7 +56,7 @@ output "cacrt" {
 }
 
 output "svcname" {
-  value       = var.mongo_svcname
+  value       = var.service_name
   description = "mongo service name"
   depends_on  = [gitops_module.module]
   sensitive   = true
