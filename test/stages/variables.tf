@@ -15,11 +15,6 @@ variable "cluster_password" {
   description = "The password for AWS access"
 }
 
-variable "ibmcloud_api_key" {
-  type        = string
-  description = "The api key for IBM Cloud access"
-}
-
 variable "server_url" {
   type        = string
 }
