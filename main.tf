@@ -16,6 +16,9 @@ locals {
     replicaset_count = var.replicaset_count
     name = local.name
     serviceName = var.service_name
+    mongocecm = {
+      cacrt = ""
+    }
     service-signed-cert = {
       secretName = local.secret_name
       serviceName = var.service_name
