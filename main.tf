@@ -27,6 +27,9 @@ locals {
         rbac = false
         create = false
       }
+      job = {
+        autoApproveCsr = true
+      }
     }
   }
   layer = "services"
