@@ -47,8 +47,9 @@ output "port" {
   depends_on  = [gitops_module.module]
   sensitive   = true
 }
+
 output "cacrt" {
-  value       = var.cacrt
+  value       = ""
   description = "CA cert used to sign MongoDB service certificate"
   depends_on  = [gitops_module.module]
   sensitive   = true
