@@ -14,8 +14,10 @@ spec:
       enabled: true
       certificateKeySecretRef:
         name: {{ .Values.secretName }}
+      {{- if .Values.mongocecm.cacrt }}
       caConfigMapRef:
         name: {{ .Values.serviceName }}
+      {{- end }}
     authentication:
       modes: ["SCRAM-SHA-1", "SCRAM-SHA-256"]
   users:

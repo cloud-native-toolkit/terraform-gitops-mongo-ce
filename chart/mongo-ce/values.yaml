@@ -11,3 +11,7 @@ mongocecm:
   cacrt: ""
 
 storageClassName: ""
+
+service-signed-cert:
+  secretName: ""
+  serviceName: ""
