@@ -36,6 +36,7 @@ module "mongo-ce" {
 }
 ```
 
+
 ## Anatomy of the GitOps module repository
 
 An automation modules is created from a template repository that includes a skeleton of the module logic and the automation framework to validate and release the module.
