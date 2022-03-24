@@ -97,12 +97,6 @@ variable "port" {
   default     = "27017"
 }
 
-variable "cacrt" {
-  type        = string
-  description = "The cacert created for database"
-  default  = ""
-}
-
 variable "mongo_version" {
   type        = string
   description = "version for mongodb to be installed"
