@@ -6,6 +6,7 @@ locals {
   yaml_dir      = "${local.tmp_dir}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
   secret_name   = "${local.name}-tls"
+  ca_config_name = "${local.name}-ca"
   password_secret_name = "${local.name}-password"
   service_account_name = "${var.service_name}-sa"
   values_content = {
@@ -16,11 +17,13 @@ locals {
     replicaset_count = var.replicaset_count
     name = local.name
     serviceName = var.service_name
+    caConfigMapName = local.ca_config_name
     mongocecm = {
       cacrt = ""
     }
     service-signed-cert = {
       secretName = local.secret_name
+      caConfigName = local.ca_config_name
       serviceName = var.service_name
       serviceAccount = {
         name = local.service_account_name
@@ -78,7 +81,7 @@ module "rbac" {
   label = "sealed-secret-cert"
   rules = [{
     apiGroups = [""]
-    resources = ["secrets"]
+    resources = ["secrets","configmaps"]
     verbs = ["*"]
   }]
 }
