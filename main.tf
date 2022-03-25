@@ -56,7 +56,12 @@ module "service_account" {
   server_name = var.server_name
   rbac_rules = [{
     apiGroups = ["certificates.k8s.io"]
-    resources = ["certificatesigningrequests"]
+    resources = ["certificatesigningrequests", "certificatesigningrequests/approval"]
+    verbs     = ["*"]
+  }, {
+    apiGroups = ["certificates.k8s.io"]
+    resources = ["signers"]
+    resourceNames = ["kubernetes.io/legacy-unknown"]
     verbs = ["*"]
   }]
   rbac_cluster_scope = true
