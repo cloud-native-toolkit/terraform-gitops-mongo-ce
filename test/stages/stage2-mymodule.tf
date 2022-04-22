@@ -1,6 +1,6 @@
 module "gitops_module" {
   source = "./module"
-  depends_on = [module.gitops_namespace]
+  depends_on = [module.cp_catalogs]
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
