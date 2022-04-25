@@ -1,6 +1,6 @@
 dependencies:
 - name: service-signed-cert
   repository: https://charts.cloudnativetoolkit.dev
-  version: 0.3.9
-digest: sha256:aae159acab0ac3018e306e58726dddcf3c54269c6065ddf184e18fde12d844c8
-generated: "2022-04-25T14:34:34.659343-04:00"
+  version: 0.3.10
+digest: sha256:da6f2e9a9853c6fc5bfd6f5c61e8ba4ddc4fc1ed197466b3c224ce9e8947e946
+generated: "2022-04-25T14:54:48.050869-04:00"
