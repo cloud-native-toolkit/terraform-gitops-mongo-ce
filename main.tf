@@ -21,6 +21,7 @@ locals {
     mongocecm = {
       cacrt = ""
     }
+    secretName = local.secret_name
     service-signed-cert = {
       secretName = local.secret_name
       caConfigName = local.ca_config_name
