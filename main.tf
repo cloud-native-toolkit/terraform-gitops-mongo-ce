@@ -18,9 +18,6 @@ locals {
     name = local.name
     serviceName = var.service_name
     caConfigMapName = local.ca_config_name
-    mongocecm = {
-      cacrt = ""
-    }
     service-signed-cert = {
       secretName = local.secret_name
       caConfigName = local.ca_config_name

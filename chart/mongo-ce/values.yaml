@@ -8,8 +8,6 @@ passwordSecretName: "mongo-ce-password"
 serviceName: "mongo-ce"
 secretName: "mongo-ce"
 
-mongocecm:
-  cacrt: ""
 
 storageClassName: ""
 

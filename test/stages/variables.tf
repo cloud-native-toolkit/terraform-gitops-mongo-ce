@@ -99,9 +99,3 @@ variable "mongo_storageclass" {
   description = "Storageclass for MongoDB"
   default = "ibmc-vpc-block-10iops-tier"
 }
-
-variable "cacrt" {
-  type        = string
-  description = "cacrt of mongo"
-  default = ""
-}
