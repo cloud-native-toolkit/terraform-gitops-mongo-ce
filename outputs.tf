@@ -48,13 +48,6 @@ output "port" {
   sensitive   = true
 }
 
-output "cacrt" {
-  value       = tls_self_signed_cert.ca.cert_pem
-  description = "mongo cacert stored in cm"
-  depends_on  = [gitops_module.module]
-  sensitive   = true
-}
-
 output "svcname" {
   value       = var.service_name
   description = "mongo service name"

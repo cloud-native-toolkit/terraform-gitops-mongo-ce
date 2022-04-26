@@ -2,12 +2,15 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-secretName: "mongo-ce"
+caConfigMapName: ""
 passwordSecretName: "mongo-ce-password"
 
 serviceName: "mongo-ce"
+secretName: "mongo-ce"
 
-mongocecm:
-  cacrt: ""
 
 storageClassName: ""
+
+service-signed-cert:
+  secretName: "mongo-ce"
+  serviceName: ""

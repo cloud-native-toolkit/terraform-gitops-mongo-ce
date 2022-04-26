@@ -13,7 +13,6 @@ resource null_resource write_outputs {
         layer_dir   = module.gitops_module.layer == "infrastructure" ? "1-infrastructure" : (module.gitops_module.layer == "services" ? "2-services" : "3-applications")
         type        = module.gitops_module.type
         port        = module.gitops_module.port
-        cacrt       = module.gitops_module.cacrt
         servicename = module.gitops_module.svcname
         password    = module.gitops_module.password
       })
