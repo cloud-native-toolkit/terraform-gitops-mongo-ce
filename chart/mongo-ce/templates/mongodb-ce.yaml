@@ -13,7 +13,7 @@ spec:
     tls:
       enabled: true
       certificateKeySecretRef:
-        name: {{ .Values.secret_name }}
+        name: {{ .Values.secretName }}
       {{- if .Values.caConfigMapName }}
       caConfigMapRef:
         name: {{ .Values.caConfigMapName }}
