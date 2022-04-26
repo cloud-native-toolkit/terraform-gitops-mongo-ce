@@ -10,7 +10,7 @@ locals {
   password_secret_name = "${local.name}-password"
   service_account_name = "${var.service_name}-sa"
   values_content = {
-    secretName = local.secret_name
+    secretName = local.name
     passwordSecretName = local.password_secret_name
     storageClassName = var.storage_class_name
     version = var.mongo_version
