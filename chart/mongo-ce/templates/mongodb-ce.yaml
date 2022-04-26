@@ -13,7 +13,7 @@ spec:
     tls:
       enabled: true
       certificateKeySecretRef:
-        name: {{ printf "%s-scram" .Values.serviceName }}
+        name: {{ .Values.secret_name }}
       {{- if .Values.caConfigMapName }}
       caConfigMapRef:
         name: {{ .Values.caConfigMapName }}
