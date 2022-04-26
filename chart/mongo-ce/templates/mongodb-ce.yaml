@@ -13,7 +13,7 @@ spec:
     tls:
       enabled: true
       certificateKeySecretRef:
-        name: {{ .Values.secretName }}
+        name: {{ printf "%s-scram" .Values.serviceName }}
       {{- if .Values.caConfigMapName }}
       caConfigMapRef:
         name: {{ .Values.caConfigMapName }}
@@ -34,7 +34,7 @@ spec:
           db: admin
         - name: readWriteAnyDatabase
           db: admin
-      scramCredentialsSecretName: {{ .Values.caConfigMapName }}
+      scramCredentialsSecretName: {{ printf "%s-scram" .Values.serviceName }}
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: snappy
     net.tls.allowInvalidCertificates: true
