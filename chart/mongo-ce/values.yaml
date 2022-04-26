@@ -6,6 +6,7 @@ caConfigMapName: ""
 passwordSecretName: "mongo-ce-password"
 
 serviceName: "mongo-ce"
+secretName: "mongo-ce"
 
 mongocecm:
   cacrt: ""
@@ -13,5 +14,5 @@ mongocecm:
 storageClassName: ""
 
 service-signed-cert:
-  secretName: ""
+  secretName: "mongo-ce"
   serviceName: ""
