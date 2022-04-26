@@ -109,7 +109,7 @@ resource null_resource create_secrets {
 module seal_secrets {
   depends_on = [null_resource.create_secrets]
 
-  source = "github.com/cloud-native-toolkit/terraform-util-seal-secrets.git?ref=v1.0.0"
+  source = "github.com/cloud-native-toolkit/terraform-util-seal-secrets.git?ref=v1.1.6"
 
   source_dir    = local.secret_dir
   dest_dir      = "${local.yaml_dir}/templates"
