@@ -98,8 +98,27 @@ resource null_resource create_yaml {
   }
 }
 
-resource gitops_module module {
+resource null_resource create_secrets {
   depends_on = [null_resource.create_yaml]
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/create-secrets.sh '${var.namespace}' '${local.secret_dir}' '${local.password_secret_name}' '${var.password}'"
+  }
+}
+
+module seal_secrets {
+  depends_on = [null_resource.create_secrets]
+
+  source = "github.com/cloud-native-toolkit/terraform-util-seal-secrets.git?ref=v1.0.0"
+
+  source_dir    = local.secret_dir
+  dest_dir      = "${local.yaml_dir}/templates"
+  kubeseal_cert = var.kubeseal_cert
+  label         = local.name
+}
+
+resource gitops_module module {
+  depends_on = [null_resource.create_yaml, module.seal_secrets]
 
   name        = local.name
   namespace   = var.namespace
@@ -111,3 +130,5 @@ resource gitops_module module {
   config      = yamlencode(var.gitops_config)
   credentials = yamlencode(var.git_credentials)
 }
+
+
