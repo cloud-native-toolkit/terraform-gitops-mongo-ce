@@ -34,7 +34,7 @@ spec:
           db: admin
         - name: readWriteAnyDatabase
           db: admin
-      scramCredentialsSecretName: {{ printf "%s-scram" .Values.serviceName }}
+      scramCredentialsSecretName: {{ .Values.caConfigMapName }}
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: snappy
     net.tls.allowInvalidCertificates: true
