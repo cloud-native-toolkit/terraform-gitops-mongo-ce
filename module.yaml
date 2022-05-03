@@ -23,6 +23,11 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-mongo-ce-operator
             version: '>= 1.0.0'
+      - id: sc-manager
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-util-storage-class-manager.git
+            version: '>= 1.0.0'
+        optional: true
     variables:
       - name: gitops_config
         moduleRef:
@@ -44,3 +49,7 @@ versions:
         moduleRef:
           id: gitops
           output: sealed_secrets_cert
+      - name: storage_class_name
+        moduleRef:
+          id: sc-manager
+          output: block_storage_class
