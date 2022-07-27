@@ -1,21 +1,22 @@
-module "olm" {
-  source = "github.com/cloud-native-toolkit/terraform-k8s-olm"
 
-  cluster_config_file = module.dev_cluster.config_file_path
-  cluster_type = module.dev_cluster.platform.type_code
-  cluster_version = module.dev_cluster.platform.version
-}
 module "gitea" {
   source = "github.com/cloud-native-toolkit/terraform-tools-gitea"
 
   cluster_config_file = module.dev_cluster.config_file_path
   cluster_type = module.dev_cluster.platform.type_code
   instance_name = var.gitea_instance_name
-  instance_namespace = module.gitops_namespace.name
-  olm_namespace = module.olm.olm_namespace
-  operator_namespace = module.olm.target_namespace
+  instance_namespace = module.gitea_namespace.name
+  olm_namespace = module.dev_software_olm.olm_namespace
+  operator_namespace = module.dev_software_olm.target_namespace
   password = var.gitea_password
   username = var.gitea_username
+}
+module "gitea_namespace" {
+  source = "github.com/cloud-native-toolkit/terraform-k8s-namespace"
+
+  cluster_config_file_path = module.dev_cluster.config_file_path
+  create_operator_group = true
+  name = var.namespace
 }
 module "gitops" {
   source = "github.com/cloud-native-toolkit/terraform-tools-gitops"
