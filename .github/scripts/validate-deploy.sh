@@ -10,6 +10,11 @@ BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
 SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
 LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
 TYPE=$(jq -r '.type // "instances"' gitops-output.json)
+MASTER_URL=$(jq -r '.master_host // empty' gitops-output.json)
+REPLICA_URL=$(jq -r '.replica_hosts // empty' gitops-output.json)
+
+echo "Master url: ${MASTER_URL}"
+echo "Replica url: ${REPLICA_URL}"
 
 mkdir -p .testrepo
 

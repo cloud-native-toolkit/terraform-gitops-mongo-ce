@@ -55,6 +55,21 @@ output "svcname" {
   sensitive   = true
 }
 
+output "private_svc_host" {
+  value       = "${var.service_name}.${gitops_module.module.namespace}.svc"
+  description = "Host name for private service endpoint"
+}
+
+output "private_master_host" {
+  value       = "${var.service_name}-0.${var.service_name}.${gitops_module.module.namespace}.svc"
+  description = "Host name for private master instance endpoint"
+}
+
+output "private_replica_host" {
+  value       = [ for index in range(var.replicaset_count): "${var.service_name}-${index}.${var.service_name}.${gitops_module.module.namespace}.svc" ]
+  description = "Host names for private replica instance endpoints"
+}
+
 output "replicaset_count" {
   value       = var.replicaset_count
   description = "Count of replicaset count"
