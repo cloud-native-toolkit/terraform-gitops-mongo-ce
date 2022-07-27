@@ -11,18 +11,11 @@ module "gitea" {
   cluster_config_file = module.dev_cluster.config_file_path
   cluster_type = module.dev_cluster.platform.type_code
   instance_name = var.gitea_instance_name
-  instance_namespace = module.gitea_namespace.name
+  instance_namespace = module.gitops_namespace.name
   olm_namespace = module.olm.olm_namespace
   operator_namespace = module.olm.target_namespace
   password = var.gitea_password
   username = var.gitea_username
-}
-module "gitea_namespace" {
-  source = "github.com/cloud-native-toolkit/terraform-k8s-namespace"
-
-  cluster_config_file_path = module.dev_cluster.config_file_path
-  create_operator_group = true
-  name = var.gitea_namespace_name
 }
 module "gitops" {
   source = "github.com/cloud-native-toolkit/terraform-tools-gitops"

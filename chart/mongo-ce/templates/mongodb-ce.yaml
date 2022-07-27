@@ -5,6 +5,8 @@ metadata:
   name: {{ .Values.serviceName }}
   labels:
     {{ include "mongo-ce.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ include "mongo-ce.syncWave" . | quote }}
 spec:
   members: {{ .Values.replicaset_count }}
   type: ReplicaSet

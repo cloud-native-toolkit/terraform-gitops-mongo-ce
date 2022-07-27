@@ -10,6 +10,9 @@ locals {
   password_secret_name = "${local.name}-password"
   service_account_name = "${var.service_name}-sa"
   values_content = {
+    global = {
+      syncWave = "1"
+    }
     secretName = local.secret_name
     passwordSecretName = local.password_secret_name
     storageClassName = var.storage_class_name
@@ -18,7 +21,7 @@ locals {
     name = local.name
     serviceName = var.service_name
     caConfigMapName = local.ca_config_name
-    service-signed-cert = {
+    ocp-service-tls = {
       secretName = local.secret_name
       caConfigName = local.ca_config_name
       serviceName = var.service_name
@@ -26,9 +29,6 @@ locals {
         name = local.service_account_name
         rbac = false
         create = false
-      }
-      job = {
-        autoApproveCsr = true
       }
     }
   }
