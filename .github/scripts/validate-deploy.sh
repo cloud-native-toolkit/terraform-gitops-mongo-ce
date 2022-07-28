@@ -57,13 +57,13 @@ fi
 
 DEPLOYMENT="statefulset/${COMPONENT_NAME}"
 count=0
-until kubectl get "${DEPLOYMENT}" -n "${NAMESPACE}" || [[ $count -eq 21 ]]; do
+until kubectl get "${DEPLOYMENT}" -n "${NAMESPACE}" || [[ $count -eq 30 ]]; do
   echo "Waiting for ${DEPLOYMENT} in ${NAMESPACE}"
   count=$((count + 1))
   sleep 30
 done
 
-if [[ $count -eq 20 ]]; then
+if ! kubectl get "${DEPLOYMENT}" -n "${NAMESPACE}"; then
   echo "Timed out waiting for ${DEPLOYMENT} in ${NAMESPACE}"
   kubectl get all -n "${NAMESPACE}"
   exit 1
