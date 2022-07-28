@@ -1,6 +1,6 @@
 dependencies:
 - name: ocp-service-tls
   repository: https://charts.cloudnativetoolkit.dev
-  version: 0.2.2
-digest: sha256:a0995e62265bf93e5713f76b217ba2846b8a2d4d08bea53ec5d95924f22b59b8
-generated: "2022-07-27T17:04:39.617691-05:00"
+  version: 0.2.3
+digest: sha256:1bfdf6f61a26965e5661c6c1bcbd3b0357c1e97c764982508995843a814fd24e
+generated: "2022-07-27T23:04:32.130571-05:00"
