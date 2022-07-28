@@ -55,36 +55,14 @@ module "service_account" {
   name = local.service_account_name
   server_name = var.server_name
   rbac_rules = [{
-    apiGroups = ["certificates.k8s.io"]
-    resources = ["certificatesigningrequests", "certificatesigningrequests/approval"]
-    verbs     = ["*"]
-  }, {
-    apiGroups = ["certificates.k8s.io"]
-    resources = ["signers"]
-    resourceNames = ["kubernetes.io/legacy-unknown"]
-    verbs = ["*"]
-  }]
-  rbac_cluster_scope = true
-}
-
-module "rbac" {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-rbac.git"
-
-  gitops_config = var.gitops_config
-  git_credentials = var.git_credentials
-  service_account_name = module.service_account.name
-  service_account_namespace = module.service_account.namespace
-  namespace = module.service_account.namespace
-  label = "sealed-secret-cert"
-  rules = [{
     apiGroups = [""]
-    resources = ["secrets","configmaps"]
+    resources = ["services", "configmaps"]
     verbs = ["*"]
   }]
 }
 
 resource null_resource create_yaml {
-  depends_on = [module.rbac]
+  depends_on = [module.service_account]
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
