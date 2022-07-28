@@ -1,6 +1,6 @@
 dependencies:
-- name: service-signed-cert
+- name: ocp-service-tls
   repository: https://charts.cloudnativetoolkit.dev
-  version: 0.3.14
-digest: sha256:ddd5d4d9d81e093515478dd0331c9ce4853bf15aa4396fcb8dd1dcc18aee83a1
-generated: "2022-04-26T15:25:35.988181-04:00"
+  version: 0.2.3
+digest: sha256:1bfdf6f61a26965e5661c6c1bcbd3b0357c1e97c764982508995843a814fd24e
+generated: "2022-07-27T23:04:32.130571-05:00"

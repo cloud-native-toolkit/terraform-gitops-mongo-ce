@@ -10,6 +10,9 @@ locals {
   password_secret_name = "${local.name}-password"
   service_account_name = "${var.service_name}-sa"
   values_content = {
+    global = {
+      syncWave = "1"
+    }
     secretName = local.secret_name
     passwordSecretName = local.password_secret_name
     storageClassName = var.storage_class_name
@@ -18,7 +21,7 @@ locals {
     name = local.name
     serviceName = var.service_name
     caConfigMapName = local.ca_config_name
-    service-signed-cert = {
+    ocp-service-tls = {
       secretName = local.secret_name
       caConfigName = local.ca_config_name
       serviceName = var.service_name
@@ -26,9 +29,6 @@ locals {
         name = local.service_account_name
         rbac = false
         create = false
-      }
-      job = {
-        autoApproveCsr = true
       }
     }
   }
@@ -55,36 +55,14 @@ module "service_account" {
   name = local.service_account_name
   server_name = var.server_name
   rbac_rules = [{
-    apiGroups = ["certificates.k8s.io"]
-    resources = ["certificatesigningrequests", "certificatesigningrequests/approval"]
-    verbs     = ["*"]
-  }, {
-    apiGroups = ["certificates.k8s.io"]
-    resources = ["signers"]
-    resourceNames = ["kubernetes.io/legacy-unknown"]
-    verbs = ["*"]
-  }]
-  rbac_cluster_scope = true
-}
-
-module "rbac" {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-rbac.git"
-
-  gitops_config = var.gitops_config
-  git_credentials = var.git_credentials
-  service_account_name = module.service_account.name
-  service_account_namespace = module.service_account.namespace
-  namespace = module.service_account.namespace
-  label = "sealed-secret-cert"
-  rules = [{
     apiGroups = [""]
-    resources = ["secrets","configmaps"]
+    resources = ["services", "configmaps"]
     verbs = ["*"]
   }]
 }
 
 resource null_resource create_yaml {
-  depends_on = [module.rbac]
+  depends_on = [module.service_account]
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
@@ -114,18 +92,37 @@ module seal_secrets {
   label         = local.name
 }
 
-resource gitops_module module {
-  depends_on = [null_resource.create_yaml, module.seal_secrets]
+resource null_resource setup_gitops {
+  depends_on = [null_resource.create_yaml]
 
-  name        = local.name
-  namespace   = var.namespace
-  content_dir = local.yaml_dir
-  server_name = var.server_name
-  layer       = local.layer
-  type        = local.type
-  branch      = local.application_branch
-  config      = yamlencode(var.gitops_config)
-  credentials = yamlencode(var.git_credentials)
+  triggers = {
+    name = local.name
+    namespace = var.namespace
+    yaml_dir = local.yaml_dir
+    server_name = var.server_name
+    layer = local.layer
+    type = local.type
+    git_credentials = yamlencode(var.git_credentials)
+    gitops_config   = yamlencode(var.gitops_config)
+    bin_dir = local.bin_dir
+  }
+
+  provisioner "local-exec" {
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}'"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --delete --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}' --debug"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
 }
-
-

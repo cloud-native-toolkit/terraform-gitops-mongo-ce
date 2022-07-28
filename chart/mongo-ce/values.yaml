@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  syncWave: "-1"
+
 caConfigMapName: ""
 passwordSecretName: "mongo-ce-password"
 
@@ -11,6 +14,8 @@ secretName: "mongo-ce"
 
 storageClassName: ""
 
-service-signed-cert:
+ocp-service-tls:
   secretName: "mongo-ce"
   serviceName: ""
+
+syncWave: ""
